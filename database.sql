@@ -50,9 +50,13 @@ CREATE TABLE attendances (
     FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Création des indexes
+-- Indexes
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_courses_teacher ON courses(teacher_id);
 CREATE INDEX idx_sessions_course ON sessions(course_id);
 CREATE INDEX idx_attendances_session ON attendances(session_id);
 CREATE INDEX idx_attendances_student ON attendances(student_id);
+
+-- Admin par défaut
+INSERT INTO users (name, email, password, role) VALUES 
+("Admin", "admin@gestio3.com", "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi", "admin");
