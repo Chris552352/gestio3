@@ -10,6 +10,16 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="<?= APP_URL ?>"><?= APP_NAME ?></a>
+            <?php if (isset($_SESSION['user'])): ?>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= APP_URL ?>/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= APP_URL ?>/logout">Déconnexion</a>
+                    </li>
+                </ul>
+            <?php endif; ?>
         </div>
     </nav>
 
