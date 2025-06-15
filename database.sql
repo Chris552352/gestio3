@@ -8,7 +8,7 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'teacher', 'student') NOT NULL DEFAULT 'student',
+    role ENUM("admin", "teacher", "student") NOT NULL DEFAULT "student",
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -41,7 +41,7 @@ CREATE TABLE attendances (
     id INT AUTO_INCREMENT PRIMARY KEY,
     session_id INT NOT NULL,
     student_id INT NOT NULL,
-    status ENUM('present', 'absent', 'late', 'excused') NOT NULL,
+    status ENUM("present", "absent", "late", "excused") NOT NULL,
     justification TEXT,
     recorded_at DATETIME NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -49,3 +49,10 @@ CREATE TABLE attendances (
     FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE,
     FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- Création des indexes
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_courses_teacher ON courses(teacher_id);
+CREATE INDEX idx_sessions_course ON sessions(course_id);
+CREATE INDEX idx_attendances_session ON attendances(session_id);
+CREATE INDEX idx_attendances_student ON attendances(student_id);
